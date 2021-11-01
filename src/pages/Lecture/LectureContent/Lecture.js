@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useFetch } from '../../../hooks/useFetch';
 import { useRouteMatch } from 'react-router-dom';
-
+import { KJH_API } from '../../../config';
 import styled from 'styled-components';
 import LectureHeader from './LectureHeader';
 import LectureFooter from './LectureFooter';
@@ -13,18 +13,12 @@ import MobileInfo from './Mobile/MobileInfo';
 function Lecture() {
   const match = useRouteMatch();
 
-  const data = useFetch(
-    'http://6d77-211-106-114-186.ngrok.io/course/video/500'
-  );
+  const data = useFetch(`${KJH_API}/courses/video/1`);
 
   const streamingData = useFetch(
-    `http://6d77-211-106-114-186.ngrok.io/course/video/detail/${match.params.id}`
+    `${KJH_API}/courses/video/detail/${match.params.id}`
   );
-
-  console.log('match.params', match.params.id);
-
-  console.log(streamingData);
-
+  console.log('data', data);
   if (!data || !streamingData) return null;
 
   return (
